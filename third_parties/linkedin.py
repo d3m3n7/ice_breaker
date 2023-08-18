@@ -1,18 +1,32 @@
+import json
 import os
 import requests
 
-def scrape_linkedin_profile(url: str):
+
+def scrape_linkedin_profile(url: str) -> dict:
     """scrape information from LinkedIn profiles given the linkedin url"""
+    with open("./third_parties/linkedin_data/johnmarty.json", "r") as f:
+        return filter_keys(json.loads(f.read()))
+
+
+def filter_keys(d: dict) -> dict:
+    relevant_keys = [
+        "public_identifier",
+        "first_name",
+        "last_name",
+        "follower_count",
+        "headline",
+        "experiences",
+    ]
+    return {key: d[key] for key in relevant_keys if key in d}
 
 
 def test_request():
-    api_key = os.environ.get('PROXYCURL_API_KEY')
-    headers = {'Authorization': 'Bearer ' + api_key}
-    endpoint = 'http://nubela.co/proxycurl/api/v2/linkedin'
-    params = {
-        'url': 'https://www.linkedin.com/in/johnrmarty/'
-    }
-    response = requests.get(url=endpoint,
-                            params=params,
-                            headers=headers)
+    """This will retrieve the John Marty linkedin profile, however it also consumes 1 Proxycurl token so use
+    carefully."""
+    api_key = os.environ.get("PROXYCURL_API_KEY")
+    headers = {"Authorization": "Bearer " + api_key}
+    endpoint = "http://nubela.co/proxycurl/api/v2/linkedin"
+    params = {"url": "https://www.linkedin.com/in/johnrmarty/"}
+    response = requests.get(url=endpoint, params=params, headers=headers)
     return response.json()

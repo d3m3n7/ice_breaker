@@ -21,11 +21,10 @@ def lookup(name: str) -> str:
         tools=tools_for_agent,
         llm=llm,
         agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-        verbose=True
+        verbose=True,
     )
 
     prompt_template = PromptTemplate(
-        template=template,
-        input_variables = ['name_of_person']
+        template=template, input_variables=["name_of_person"]
     )
     return "Linkedin Profile URL"
