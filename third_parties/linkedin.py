@@ -2,9 +2,12 @@ import json
 import os
 import requests
 
+from utils import save_to_file
+
 
 def scrape_linkedin_profile(url: str) -> dict:
     """scrape information from LinkedIn profiles given the linkedin url"""
+    assert url == "https://www.linkedin.com/in/johnrmarty"
     with open("./third_parties/linkedin_data/johnmarty.json", "r") as f:
         return filter_keys(json.loads(f.read()))
 
@@ -29,4 +32,5 @@ def test_request():
     endpoint = "http://nubela.co/proxycurl/api/v2/linkedin"
     params = {"url": "https://www.linkedin.com/in/johnrmarty/"}
     response = requests.get(url=endpoint, params=params, headers=headers)
+    save_to_file(response.json(), file="test_request.json")
     return response.json()
