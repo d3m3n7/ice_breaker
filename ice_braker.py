@@ -6,10 +6,11 @@ from langchain.chains import LLMChain
 
 from agents.linkedin_lookup_agent import lookup
 from third_parties.linkedin import scrape_linkedin_profile
+from third_parties.twitter import scrape_user_tweets
 from utils import get_webpage
 
 
-def run_chain():
+def summarize_linkedin():
     summary_template = """
         Given the information {information} about a person from I want you to create:
             1. A short summary
@@ -27,4 +28,8 @@ def run_chain():
     print(result)
 
 
-run_chain()
+def test_twitter():
+    scrape_user_tweets(username="@elonmusk")
+
+
+test_twitter()

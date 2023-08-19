@@ -11,7 +11,7 @@ class CustomSerpAPIWrapper(SerpAPIWrapper):
         return res["organic_results"][0]["link"]
 
 
-def get_profile_url(text: str) -> str:
+def google_search(text: str) -> str:
     """Searches for Linkedin Profile Page."""
     search = CustomSerpAPIWrapper()
     return search.run(f"{text}")
