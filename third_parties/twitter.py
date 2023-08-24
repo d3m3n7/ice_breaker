@@ -34,6 +34,9 @@ def get_api():
     )
     return tweepy.API(auth)
 
+# TODO: This function requires a subscription to the Twitter API.
+#       The basic plan costs 100$ which is the cheapest that allows READING tweets.
+#       The current subscription I have only allows POSTing tweets which renders it useless for data scrapping
 def scrape_user_tweets(username, num_tweets=5):
     api = get_api()
     tweets = api.user_timeline(screen_name=username, count=num_tweets)
