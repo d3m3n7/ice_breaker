@@ -5,9 +5,11 @@ from output_parser import get_parser, parse
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 @app.route("/process", methods=["POST"])
 def process():
@@ -21,7 +23,7 @@ def process():
             interests=person_intel.topics_of_interest,
             facts=person_intel.facts,
             ice_breakers=person_intel.ice_breakers,
-            picture_url="No picture"
+            picture_url="No picture",
         )
     )
 
