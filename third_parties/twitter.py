@@ -25,6 +25,7 @@ def get_twitter_access_token() -> str:
 def get_twitter_access_token_secret() -> str:
     return os.environ["TWITTER_ACCESS_TOKEN_SECRET"]
 
+
 def get_api():
     auth = tweepy.OAuth1UserHandler(
         consumer_key=get_twitter_consumer_api_key(),
@@ -33,6 +34,7 @@ def get_api():
         access_token_secret=get_twitter_access_token_secret(),
     )
     return tweepy.API(auth)
+
 
 # TODO: This function requires a subscription to the Twitter API.
 #       The basic plan costs 100$ which is the cheapest that allows READING tweets.
