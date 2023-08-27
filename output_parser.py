@@ -24,3 +24,7 @@ class PersonIntel(BaseModel):
 
 def get_parser() -> PydanticOutputParser:
     return PydanticOutputParser(pydantic_object=PersonIntel)
+
+
+def parse(json_string: str) -> PersonIntel:
+    return get_parser().parse(json_string)

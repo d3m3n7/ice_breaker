@@ -6,13 +6,13 @@ from langchain.chains import LLMChain
 from langchain.output_parsers import PydanticOutputParser
 
 from agents.linkedin_lookup_agent import lookup
-from output_parser import get_parser
+from output_parser import get_parser, parse
 from third_parties.linkedin import scrape_linkedin_profile
 from third_parties.twitter import scrape_user_tweets
 from utils import get_webpage
 
 
-def summarize_linkedin(person_intel_parser: PydanticOutputParser):
+def summarize_linkedin(person_intel_parser: PydanticOutputParser) -> str:
     summary_template = """
         Given the information {information} about a person from I want you to create:
             1. A short summary
@@ -38,4 +38,5 @@ def summarize_linkedin(person_intel_parser: PydanticOutputParser):
 
 if __name__ == "__main__":
     result = summarize_linkedin(person_intel_parser=get_parser())
-    print(result)
+    person_intel = parse(result)
+    print(person_intel)
